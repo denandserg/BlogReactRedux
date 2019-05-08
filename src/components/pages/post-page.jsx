@@ -1,8 +1,9 @@
 import React from 'react';
+import Article from "../article/article";
 
-const PostPage = () => {
-    return(
-        <div>Post Page</div>
+const PostPage = (post) => {
+    return (
+        <Article post={post} />
     )
 };
 

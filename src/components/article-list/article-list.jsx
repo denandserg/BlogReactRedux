@@ -5,17 +5,27 @@ import './article-list.less';
 import ArticleListItem from "../article-list-item/article-list-item";
 import withBlogService from '../hoc'
 import { postsLoaded, postsRequested, postsError } from "../../actions";
+import { withRouter } from 'react-router'
 
 import Spinner from '../spinner';
 import ErrorIndicator from "../error-indicator/error-indicator";
+import { Link } from 'react-router-dom';
 
 const ArticleList = ({posts}) => {
+
+    const onItemSelected = (id) => {
+        console.log(id);
+    };
+
     return (
         <ul className='article-list'>
             {
                 posts.map( article => {
                     return (
-                        <li key={article.id}><ArticleListItem post={article}/></li>
+                        <Link key={article.id} style={{textDecoration: 'none', color: 'black'}} to={`/posts/${article.id}?_embed=comments`}>
+                            <li key={article.id} onClick={() => {onItemSelected(article.id)}}><ArticleListItem post={article}/></li>
+                        </Link>
+
                     )
                 })
             }
@@ -71,5 +81,5 @@ const mapDispatchToProps = {
 export default compose(
     withBlogService(),
     connect(mapStateToProps, mapDispatchToProps)
-)(ArticleListContainer);
+)(withRouter(ArticleListContainer));
 

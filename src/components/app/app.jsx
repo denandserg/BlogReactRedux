@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import { Route, Switch } from 'react-router';
 import { HomePage, PostPage } from '../pages'
 import Header from '../header'
@@ -13,8 +13,12 @@ const App = () => {
                        component={HomePage}
                        exact
                 />
-                <Route path='/posts'
-                       component={PostPage}
+                <Route path='/posts/:id'
+                       render={({ match }) => {
+                           const { id } = match.params;
+                           console.log(match);
+                           return <PostPage itemId={id}/>
+                       }}
                 />
             </Switch>
         </div>

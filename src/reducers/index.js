@@ -2,27 +2,54 @@ const initialState = {
     posts: [],
     loading: true,
     error: null,
+    currentArticle: {},
+    loadingArticle: true,
+    errorArticle: null,
 };
 
 const reducer = (state=initialState, action) => {
     switch (action.type) {
-        case 'POSTS_REQUESTED':
+        case 'FETCH_POSTS_REQUEST':
             return {
+                ...state,
                 posts: [],
                 loading: true,
                 error: null
             };
-        case 'POSTS_LOADED':
+        case 'FETCH_POSTS_SUCCESS':
             return {
+                ...state,
                 posts: action.payload,
                 loading: false,
                 error: null
             };
-        case 'POSTS_ERROR':
+        case 'FETCH_POSTS_FAILURE':
             return {
+                ...state,
                 posts: [],
                 loading: false,
                 error: action.payload
+            };
+        case 'FETCH_CURRENT-ARTICLE_REQUEST':
+            return {
+                ...state,
+                currentArticle: {},
+                loadingArticle: true,
+                errorArticle: null
+            };
+        case 'FETCH_CURRENT-ARTICLE_SUCCESS':
+            return {
+                ...state,
+                currentArticle: action.payload,
+                loadingArticle: false,
+                errorArticle: null
+            };
+        case 'FETCH_CURRENT-ARTICLE_FAILURE':
+            return {
+                ...state,
+                currentArticle: {},
+                loadingArticle: false,
+                errorArticle: action.payload
             };
 
         default:

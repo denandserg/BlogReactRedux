@@ -1,25 +1,48 @@
 const postsLoaded = (newPosts) => {
     return {
-        type: 'POSTS_LOADED',
+        type: 'FETCH_POSTS_SUCCESS',
         payload: newPosts,
     }
 };
 
 const postsRequested = () => {
     return {
-        type: 'POSTS_REQUESTED'
+        type: 'FETCH_POSTS_REQUEST'
     }
 };
 
 const postsError = (error) => {
     return {
-        type: 'POSTS_ERROR',
+        type: 'FETCH_POSTS_FAILURE',
         payload: error
+    }
+};
+
+const currentArticleLoaded = (newArticle) => {
+    return {
+        type: 'FETCH_CURRENT-ARTICLE_SUCCESS',
+        payload: newArticle,
+    }
+};
+
+const currentArticleError = (error) => {
+    return {
+        type: 'FETCH_CURRENT-ARTICLE_FAILURE',
+        payload: error
+    }
+};
+
+const currentArticleRequest = () => {
+    return {
+        type: 'FETCH_CURRENT-ARTICLE_REQUEST'
     }
 };
 
 export {
     postsLoaded,
     postsRequested,
-    postsError
+    postsError,
+    currentArticleError,
+    currentArticleLoaded,
+    currentArticleRequest
 };

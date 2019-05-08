@@ -1,48 +1,75 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import compose from '../../utils/compose';
 import './article-list.less';
 import ArticleListItem from "../article-list-item/article-list-item";
 import withBlogService from '../hoc'
-import { postsLoaded } from "../../actions";
+import { postsLoaded, postsRequested, postsError } from "../../actions";
 
-class ArticleList extends React.Component {
+import Spinner from '../spinner';
+import ErrorIndicator from "../error-indicator/error-indicator";
+
+const ArticleList = ({posts}) => {
+    return (
+        <ul className='article-list'>
+            {
+                posts.map( article => {
+                    return (
+                        <li key={article.id}><ArticleListItem post={article}/></li>
+                    )
+                })
+            }
+        </ul>
+    )
+};
+
+class ArticleListContainer extends React.Component {
     componentDidMount () {
-        const { apiBlogService } = this.props;
-        const data = apiBlogService.getAllPosts().then(data => {
-            this.props.postsLoaded(data);
-        });
+        const { apiBlogService,
+                postsLoaded,
+                postsRequested,
+                postsError } = this.props;
+
+        postsRequested();
+        apiBlogService.getAllPosts()
+            .then(data => postsLoaded(data))
+            .catch(error => postsError(error));
     }
 
     render() {
-        const { posts } = this.props;
+        const { posts, loading, error } = this.props;
+
+        if(loading) {
+            return <Spinner />
+        }
+
+        if(error) {
+            return <ErrorIndicator />
+        }
+
         return(
-            <ul className='article-list'>
-                {
-                    posts.map( article => {
-                        return (
-                            <li><ArticleListItem post={article}/></li>
-                        )
-                    })
-                }
-            </ul>
+            <ArticleList posts={posts}/>
         );
     }
 }
 
-const mapStateToProps = ({posts}) => {
+const mapStateToProps = ({posts, loading, error}) => {
     return {
         posts: posts,
+        loading: loading,
+        error: error
     }
 };
 
-const mapDispatchToProps = (dispatch) => {
-    return {
-        postsLoaded: (newPosts) => {
-            dispatch(postsLoaded(newPosts))
-        }
-    };
+const mapDispatchToProps = {
+    postsLoaded,
+    postsRequested,
+    postsError
 };
 
-export default withBlogService()(
-    connect(mapStateToProps, mapDispatchToProps)(ArticleList));
+
+export default compose(
+    withBlogService(),
+    connect(mapStateToProps, mapDispatchToProps)
+)(ArticleListContainer);
 

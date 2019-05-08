@@ -1,15 +1,15 @@
-import React, {Fragment} from 'react';
+import React from 'react';
 import './article-list-item.less';
 
 const ArticleListItem = ({post}) => {
-    const { title, body, author, data } = post;
+    const { title, body, author, date } = post;
     return (
-        <Fragment>
-            <span>{data}</span>
-            <span>{title}</span>
-            <span>{body}</span>
-            <span>{author}</span>
-        </Fragment>
+        <div className='article-list-item'>
+            <div className='article-list-item__date'>{date}</div>
+            <div className='article-list-item__title'>{title}</div>
+            <div className='article-list-item__body'>{body}</div>
+            <div className='article-list-item__author'>{author}</div>
+        </div>
     )
 };
 

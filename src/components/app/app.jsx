@@ -6,7 +6,7 @@ import './app.less';
 
 const App = () => {
     return (
-        <Fragment>
+        <div className='blog-app'>
             <Header />
             <Switch>
                 <Route path='/'
@@ -17,7 +17,7 @@ const App = () => {
                        component={PostPage}
                 />
             </Switch>
-        </Fragment>
+        </div>
 
     )
 };

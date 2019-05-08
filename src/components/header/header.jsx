@@ -1,10 +1,11 @@
 import React from 'react';
+import './header.less';
 
 const Header = () => {
   return(
-      <h1>
-          Blog
-      </h1>
+      <div className="app-header">
+          <h1>Blog</h1>
+      </div>
   )
 };
 

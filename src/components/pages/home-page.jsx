@@ -1,8 +1,9 @@
 import React from 'react';
+import ArticleList from "../article-list/article-list";
 
 const HomePage = () => {
     return(
-        <div>Home Page</div>
+        <ArticleList />
     )
 };
 

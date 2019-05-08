@@ -21,6 +21,6 @@ export default class ApiBlogService {
 
 const api = new ApiBlogService();
 
-api.getAllPosts().then((body) => {console.log(body)});
-api.getCurrentPost(26).then((body) => {console.log(body)});
+// api.getAllPosts().then((body) => {console.log(body)});
+// api.getCurrentPost(26).then((body) => {console.log(body)});
 

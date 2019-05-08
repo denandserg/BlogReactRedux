@@ -6,9 +6,9 @@ const withBlogService = () => (Wrapped) => {
         return (
             <BlogServiceConsumer>
                 {
-                    (BlogService) => {
+                    (apiBlogService) => {
                         return (
-                            <Wrapped {...props} blogService={BlogService}/>
+                            <Wrapped {...props} apiBlogService={apiBlogService}/>
                         )
                     }
                 }

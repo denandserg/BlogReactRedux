@@ -1,0 +1,91 @@
+{
+  "name": "Blog",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "webpack --mode production",
+    "dev": "webpack-dev-server --open chrome --mode development "
+  },
+  "author": "",
+  "license": "ISC",
+  "nyc": {
+    "check-coverage": false,
+    "per-file": true,
+    "lines": 100,
+    "statements": 100,
+    "functions": 100,
+    "branches": 100,
+    "reporter": [
+      "lcov",
+      "text",
+      "text-summary"
+    ],
+    "require": [
+      "@babel/register"
+    ],
+    "exclude": [
+      "coverage/**",
+      "test/**",
+      "test{,-*}.js",
+      "**/*.test.js",
+      "**/__tests__/**",
+      "**/node_modules/**",
+      "**/__snapshots__/**",
+      ".nyc_output/**",
+      ".nyc_output-tmp/**",
+      "config/mocha-setup.js",
+      "config/mocha.opts",
+      "**/mockData/**"
+    ],
+    "cache": true,
+    "all": false,
+    "temp-directory": "./.nyc_output-tmp",
+    "report-dir": "./.nyc_output"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.4.3",
+    "@babel/plugin-proposal-class-properties": "^7.4.0",
+    "@babel/polyfill": "^7.4.0",
+    "@babel/preset-env": "^7.4.3",
+    "@babel/preset-react": "^7.0.0",
+    "@babel/register": "^7.4.0",
+    "babel-loader": "^8.0.5",
+    "chai": "^4.2.0",
+    "css-loader": "^2.1.1",
+    "enzyme": "^3.9.0",
+    "enzyme-adapter-react-16": "^1.11.2",
+    "extract-text-webpack-plugin": "^4.0.0-beta.0",
+    "file-loader": "^3.0.1",
+    "html-webpack-plugin": "^3.2.0",
+    "jsdom": "^14.0.0",
+    "less": "^3.9.0",
+    "less-loader": "^4.1.0",
+    "mocha": "^6.0.2",
+    "mocha-snapshots": "^4.2.0",
+    "nyc": "^13.3.0",
+    "postcss-loader": "^3.0.0",
+    "prop-types": "^15.7.2",
+    "redux-logger": "^3.0.6",
+    "sinon": "^7.3.0",
+    "style-loader": "^0.23.1",
+    "webpack": "^4.29.6",
+    "webpack-cli": "^3.3.0",
+    "webpack-dev-server": "^3.3.1"
+  },
+  "dependencies": {
+    "babel-polyfill": "^6.26.0",
+    "rc-queue-anim": "^1.6.12",
+    "react": "^16.8.6",
+    "react-addons-css-transition-group": "^15.6.2",
+    "react-dom": "^16.8.6",
+    "react-redux": "^7.0.3",
+    "react-router": "^5.0.0",
+    "react-router-dom": "^5.0.0",
+    "react-scripts": "2.1.8",
+    "react-scrollbar": "^0.5.4",
+    "redux": "^4.0.1",
+    "redux-thunk": "^2.3.0",
+    "uuid": "^3.3.2"
+  }
+}

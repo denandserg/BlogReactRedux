@@ -1,3 +1,5 @@
+import constants from '../constatnts/constatnts'
+
 const initialState = {
     posts: [],
     loading: true,
@@ -42,6 +44,18 @@ const reducer = (state=initialState, action) => {
             return {
                 ...state,
                 currentArticle: action.payload,
+                loadingArticle: false,
+                errorArticle: null
+            };
+        case constants.ADD_NEW_COMMENT:
+            return {
+                ...state,
+                currentArticle: {
+                    ...state.currentArticle,
+                    comments: [
+                        ...state.currentArticle.comments.concat(action.payload)
+                    ]
+                },
                 loadingArticle: false,
                 errorArticle: null
             };

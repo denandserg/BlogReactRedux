@@ -1,3 +1,5 @@
+import constants from '../constatnts/constatnts';
+
 const postsLoaded = (newPosts) => {
     return {
         type: 'FETCH_POSTS_SUCCESS',
@@ -50,6 +52,8 @@ const addFormArticleHide = () => {
         type: 'ADD_FORM-ARTICLE_HIDE'
     }
 };
+
+export const addNewComment = payload => ({type: constants.ADD_NEW_COMMENT, payload});
 
 export {
     postsLoaded,

@@ -1,7 +1,7 @@
 import React from 'react';
 import withBlogService from '../hoc'
 import './add-form-comments.less';
-import {currentArticleError, currentArticleLoaded, currentArticleRequest} from '../../actions'
+import {currentArticleError, currentArticleLoaded, currentArticleRequest, addNewComment} from '../../actions';
 import {connect} from "react-redux";
 import compose from "../../utils/compose";
 
@@ -10,11 +10,12 @@ class AddFormComments extends React.Component {
     input = React.createRef();
 
     onClickButton = () => {
-        const { articleId, apiBlogService } = this.props;
+        const { articleId, apiBlogService, addNewComment } = this.props;
         currentArticleRequest();
         apiBlogService.addComment(articleId, this.input.current.value)
-            .then(apiBlogService.getCurrentPost(articleId))
-            .then(data => currentArticleLoaded(data))
+            .then(data => {
+                addNewComment(data);
+            })
             .catch(error => currentArticleError(error));
     };
 
@@ -53,6 +54,7 @@ const mapStateToProps = ({ currentArticle, loadingArticle, errorArticle }) => {
 };
 
 const mapDispatchToProps = {
+    addNewComment,
     currentArticleError,
     currentArticleLoaded,
     currentArticleRequest

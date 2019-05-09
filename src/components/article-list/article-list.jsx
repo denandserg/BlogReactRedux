@@ -12,26 +12,22 @@ import ErrorIndicator from "../error-indicator/error-indicator";
 import { Link } from 'react-router-dom';
 import AddArticle from "../add-article/add-article";
 
-const ArticleList = ({posts, addForm}) => {
+const ArticleList = (props) => {
 
-    const showFormAdd = () => {
-        addFormArticleShow();
-    };
     return (
         <React.Fragment>
             <button className='btn btn--long'
-                    onClick={showFormAdd}
+                    onClick={()=>props.addFormArticleShow()}
             >
                 Add new article
             </button>
             <ul className='article-list'>
                 {
-                    posts.map( article => {
+                    props.posts.map( article => {
                         return (
                             <Link key={article.id} style={{textDecoration: 'none', color: 'black'}} to={`/posts/${article.id}?_embed=comments`}>
                                 <li key={article.id}><ArticleListItem post={article}/></li>
                             </Link>
-
                         )
                     })
                 }
@@ -55,10 +51,10 @@ class ArticleListContainer extends React.Component {
     }
 
     render() {
-        const { posts, loading, error, addFormArticle } = this.props;
+        const { posts, loading, error, addFormArticle, addFormArticleShow, addFormArticleHide } = this.props;
 
         if(addFormArticle) {
-            return <AddArticle />
+            return <AddArticle addFormArticleHide={addFormArticleHide}/>
         }
 
         if(loading) {
@@ -70,7 +66,7 @@ class ArticleListContainer extends React.Component {
         }
 
         return(
-            <ArticleList posts={posts} addForm={addFormArticle}/>
+            <ArticleList posts={posts} addFormArticleShow={addFormArticleShow}/>
         );
     }
 }
@@ -91,7 +87,6 @@ const mapDispatchToProps = {
     addFormArticleHide,
     addFormArticleShow
 };
-
 
 export default compose(
     withBlogService(),

@@ -41,7 +41,6 @@ const currentArticleRequest = () => {
 };
 
 const addFormArticleShow = () => {
-    console.log('disp');
     return {
         type: 'ADD_FORM-ARTICLE_UNHIDE'
     }
@@ -53,6 +52,7 @@ const addFormArticleHide = () => {
     }
 };
 
+
 export const addNewComment = payload => ({type: constants.ADD_NEW_COMMENT, payload});
 
 export {
@@ -63,5 +63,5 @@ export {
     currentArticleLoaded,
     currentArticleRequest,
     addFormArticleHide,
-    addFormArticleShow
+    addFormArticleShow,
 };

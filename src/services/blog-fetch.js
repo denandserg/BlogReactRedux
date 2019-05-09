@@ -68,10 +68,10 @@ export default class ApiBlogService {
                     'Accept': 'application/json',
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify({ "title": title,
-                                        "body": body,
-                                        "date": date,
-                                         "author": author
+                body: JSON.stringify({ "title": `${title}`,
+                                        "body": `${body}`,
+                                        "date": `${date}`,
+                                         "author": `${author}`
                 })
             });
         if (!res.ok) {

@@ -11,6 +11,9 @@ import {
     currentArticleRequest,
     currentArticleLoaded,
     currentArticleError,
+    postsRequested,
+    postsError,
+    postsLoaded
 } from "../../actions";
 import AddFormComments from "../add-form-comments/add-form-comments";
 
@@ -30,7 +33,16 @@ class Article extends React.Component {
     }
 
     delArticle(id) {
-        this.props.apiBlogService.deleteCurrentPost(id);
+        const { postsRequested, postsError, postsLoaded, apiBlogService } = this.props;
+        apiBlogService.deleteCurrentPost(id)
+            .then(()=>postsRequested())
+            .then(()=>apiBlogService.getAllPosts())
+                .then(data => postsLoaded(data))
+                .catch(error => postsError(error));
+    }
+
+    editArticle(id) {
+
     }
 
     render() {
@@ -47,7 +59,9 @@ class Article extends React.Component {
         return (
             <React.Fragment>
                 <div className='btn-wrapper'>
-                    <button className='btn btn--long'>
+                    <button className='btn btn--long'
+                            onClick={()=>this.editArticle(id)}
+                    >
                         Edit
                     </button>
                     <Link to='/'>
@@ -107,7 +121,10 @@ const mapStateToProps = ({ currentArticle, loadingArticle, errorArticle }) => {
 const mapDispatchToProps = {
     currentArticleError,
     currentArticleLoaded,
-    currentArticleRequest
+    currentArticleRequest,
+    postsRequested,
+    postsError,
+    postsLoaded
 };
 
 export default compose(

@@ -6,6 +6,7 @@ import './article.less';
 import Spinner from '../spinner';
 import ScrollArea from 'react-scrollbar';
 import ErrorIndicator from "../error-indicator/error-indicator";
+import { Link } from 'react-router-dom';
 import {
     currentArticleRequest,
     currentArticleLoaded,
@@ -28,6 +29,10 @@ class Article extends React.Component {
             .catch(error => currentArticleError(error));
     }
 
+    delArticle(id) {
+        this.props.apiBlogService.deleteCurrentPost(id);
+    }
+
     render() {
         const { currentArticle, loadingArticle, errorArticle } = this.props;
         const { id, date, title, body, author, comments } = currentArticle;
@@ -45,9 +50,13 @@ class Article extends React.Component {
                     <button className='btn btn--long'>
                         Edit
                     </button>
-                    <button className='btn btn--long'>
-                        Delete
-                    </button>
+                    <Link to='/'>
+                        <button className='btn btn--long'
+                                onClick={()=>this.delArticle(id)}
+                        >
+                            Delete
+                        </button>
+                    </Link>
                 </div>
                 <ul className='article-list'>
                     <li key={id}>

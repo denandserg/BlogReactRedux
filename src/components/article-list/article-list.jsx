@@ -10,14 +10,12 @@ import { withRouter } from 'react-router'
 import Spinner from '../spinner';
 import ErrorIndicator from "../error-indicator/error-indicator";
 import { Link } from 'react-router-dom';
+import AddArticle from "../add-article/add-article";
 
 const ArticleList = ({posts, addForm}) => {
 
     const showFormAdd = () => {
-        debugger
-        console.log(addForm);
         addFormArticleShow();
-        console.log(addForm);
     };
     return (
         <React.Fragment>
@@ -60,7 +58,7 @@ class ArticleListContainer extends React.Component {
         const { posts, loading, error, addFormArticle } = this.props;
 
         if(addFormArticle) {
-            return <div>Super</div>
+            return <AddArticle />
         }
 
         if(loading) {

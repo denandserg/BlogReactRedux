@@ -39,6 +39,7 @@ const currentArticleRequest = () => {
 };
 
 const addFormArticleShow = () => {
+    console.log('disp');
     return {
         type: 'ADD_FORM-ARTICLE_UNHIDE'
     }

@@ -53,6 +53,7 @@ const reducer = (state=initialState, action) => {
                 errorArticle: action.payload
             };
         case 'ADD_FORM-ARTICLE_UNHIDE':
+            console.log('reducer');
             return {
                 ...state,
                 addFormArticle: true,

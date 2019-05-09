@@ -10,6 +10,23 @@ export default class ApiBlogService {
         return await res.json();
     }
 
+    async postResource (url, id, body) {
+        const res = await fetch(`${this._baseUrl}${url}`,
+             {
+                method: 'POST',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ "postId": id, "body": body })
+             });
+        if (!res.ok) {
+            throw new Error(`Could not fetch ${url}` +
+                `, received ${res.status}`)
+        }
+        return await res.json();
+    }
+
     getAllPosts () {
         return this.getResource(`posts`);
     }
@@ -17,10 +34,9 @@ export default class ApiBlogService {
     getCurrentPost (id) {
         return this.getResource(`posts/${id}?_embed=comments`);
     }
+
+    addComment (id, body) {
+        return this.postResource(`comments`, id, body)
+    }
 }
-
-//const api = new ApiBlogService();
-
-
-//api.getCurrentPost(26).then((body) => {console.log(body)});
 

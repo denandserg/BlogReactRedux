@@ -16,7 +16,6 @@ const App = () => {
                 <Route path='/posts/:id'
                        render={({ match }) => {
                            const { id } = match.params;
-                           console.log(match);
                            return <PostPage itemId={id}/>
                        }}
                 />

@@ -5,6 +5,7 @@ const initialState = {
     currentArticle: {},
     loadingArticle: true,
     errorArticle: null,
+    addFormArticle: false,
 };
 
 const reducer = (state=initialState, action) => {
@@ -50,6 +51,16 @@ const reducer = (state=initialState, action) => {
                 currentArticle: {},
                 loadingArticle: false,
                 errorArticle: action.payload
+            };
+        case 'ADD_FORM-ARTICLE_UNHIDE':
+            return {
+                ...state,
+                addFormArticle: true,
+            };
+        case 'ADD_FORM-ARTICLE_HIDE':
+            return {
+                ...state,
+                addFormArticle: false,
             };
 
         default:

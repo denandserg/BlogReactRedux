@@ -4,12 +4,14 @@ import compose from '../../utils/compose';
 import withBlogService from '../hoc'
 import './article.less';
 import Spinner from '../spinner';
+import ScrollArea from 'react-scrollbar';
 import ErrorIndicator from "../error-indicator/error-indicator";
 import {
     currentArticleRequest,
     currentArticleLoaded,
     currentArticleError,
 } from "../../actions";
+import AddFormComments from "../add-form-comments/add-form-comments";
 
 class Article extends React.Component {
     componentDidMount () {
@@ -27,9 +29,9 @@ class Article extends React.Component {
     }
 
     render() {
-        debugger;
         const { currentArticle, loadingArticle, errorArticle } = this.props;
         const { id, date, title, body, author, comments } = currentArticle;
+
         if(loadingArticle) {
             return <Spinner />
         }
@@ -39,32 +41,47 @@ class Article extends React.Component {
         }
         return (
             <React.Fragment>
+                <div className='btn-wrapper'>
+                    <button className='btn btn--long'>
+                        Edit
+                    </button>
+                    <button className='btn btn--long'>
+                        Delete
+                    </button>
+                </div>
                 <ul className='article-list'>
                     <li key={id}>
-                        <div className='article-list-item'>
+                        <div className='article-list-item article-list-item--long'>
                             <div className='article-list-item__date'>{date}</div>
                             <div className='article-list-item__title'>{title}</div>
-                            <div className='article-list-item__body'>{body}</div>
+                            <div className='article-list-item__body article-list-item__body--long'>{body}</div>
                             <div className='article-list-item__author'>{author}</div>
                         </div>
                     </li>
                 </ul>
                 <div>
                     <ul className='article-list'>
-                       {
-                           comments.map((com)=>{
-                               return (
-                                   <li key={com.id}>
-                                       {com.body}
-                                   </li>
-                               );
-                           })
-                       }
+                        <ScrollArea
+                            speed={0.8}
+                            className="area"
+                            contentClassName="content"
+                            horizontal={false}
+                            contentWindow={window || {}}
+                            ownerDocument={document || {}}
+                        >
+                            {
+                                comments.map((com)=>{
+                                    return (
+                                        <li key={com.id}>
+                                            {com.body}
+                                        </li>
+                                    );
+                                })
+                            }
+                        </ScrollArea>
                     </ul>
                 </div>
-                <div>
-                    <button className='btn'>Add comments</button>
-                </div>
+                <AddFormComments articleId={id}/>
             </React.Fragment>
         )
     }

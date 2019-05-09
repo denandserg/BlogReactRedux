@@ -38,11 +38,25 @@ const currentArticleRequest = () => {
     }
 };
 
+const addFormArticleShow = () => {
+    return {
+        type: 'ADD_FORM-ARTICLE_UNHIDE'
+    }
+};
+
+const addFormArticleHide = () => {
+    return {
+        type: 'ADD_FORM-ARTICLE_HIDE'
+    }
+};
+
 export {
     postsLoaded,
     postsRequested,
     postsError,
     currentArticleError,
     currentArticleLoaded,
-    currentArticleRequest
+    currentArticleRequest,
+    addFormArticleHide,
+    addFormArticleShow
 };
